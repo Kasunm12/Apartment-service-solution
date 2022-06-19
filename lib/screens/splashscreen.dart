@@ -13,42 +13,65 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    /*Timer(
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    Timer(
         Duration(seconds: 5),
             () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => HomePage())));*/
+            MaterialPageRoute(builder: (BuildContext context) => HomePage())));
     return Scaffold(
-        backgroundColor: Colors.lightBlue,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Loading.",
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontFamily: "Dubai"),
+        body: Container(
+          width: width ,
+          height: height,
+          decoration: new BoxDecoration(
+              gradient: new LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 173, 230, 233),
+                  Color.fromARGB(255, 233, 227, 254)
+                ],
+              )),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: (height/2)-79,),
+              Container(
+                width: width,
+                height: 157,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                        'assets/images/loading page.png'),
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SpinKitThreeBounce(
-                  color: Colors.black,
-                  size: 22,
-                )
-              ],
-            ),
-          ],
+              ),
+              SizedBox(
+                height: height/2-170,
+              ),
+              Text(
+                "Loading.",
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    fontFamily: "Dubai"),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SpinKitThreeBounce(
+                    color: Colors.black,
+                    size: 22,
+                  )
+                ],
+              ),
+            ],
+          ),
         ));
   }
 }
