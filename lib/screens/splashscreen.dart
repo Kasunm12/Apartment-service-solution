@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'package:apartment_service_solution/screens/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import '../widgets/bottomnavbar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 5),
             () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => HomePage())));
+            MaterialPageRoute(builder: (BuildContext context) => BottomNavBar())));
     return Scaffold(
         body: Container(
           width: width ,
