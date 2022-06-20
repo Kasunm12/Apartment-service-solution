@@ -1,3 +1,4 @@
+import 'package:apartment_service_solution/screens/addedservices.dart';
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:apartment_service_solution/screens/previousutilitybills.dart';
 import 'package:apartment_service_solution/screens/splashscreen.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PreviousUtilityBills(),
+      home: AddedServices(),
     );
   }
 }
