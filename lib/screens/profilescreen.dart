@@ -1,3 +1,5 @@
+import 'package:apartment_service_solution/screens/my_information.dart';
+import 'package:apartment_service_solution/screens/password_change.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: backgroundGreen,
       body: Column(
         children: [
           SizedBox(height: height* 0.1,),
@@ -58,17 +60,27 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: const EdgeInsets.only( left: 30, right: 30, bottom: 20),
             child: Column(
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    ImageIcon(
-                      AssetImage("assets/icons/information.png"),
-                      color: iconGreen,
-                      size: 50,
-                    ),
-                    SizedBox(width: 15,),
-                    Text("Sadali Fernando", style: TextStyle(fontSize: 22, color: iconGreen),),
-                  ],
+                InkWell(
+                  onTap:(){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const MyInformation()),
+                    );
+                  },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      ImageIcon(
+                        AssetImage("assets/icons/information.png"),
+                        color: iconGreen,
+                        size: 50,
+                      ),
+                      SizedBox(width: 15,),
+                      Text("My Information", style: TextStyle(fontSize: 22, color: iconGreen),),
+                    ],
+                  ),
                 ),
                 Divider(
                     color: Colors.black
@@ -90,17 +102,27 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: Colors.black
                 ),
                 SizedBox(height: height*0.1,),
-                Row(
-                 // crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    ImageIcon(
-                      AssetImage("assets/icons/lock.png"),
-                      color: iconGreen,
-                      size: 50,
-                    ),
-                    SizedBox(width: 15,),
-                    Text("Change Password", style: TextStyle(fontSize: 18, color: iconGreen),),
-                  ],
+                InkWell(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                          const PasswordChange()),
+                    );
+                  },
+                  child: Row(
+                   // crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      ImageIcon(
+                        AssetImage("assets/icons/lock.png"),
+                        color: iconGreen,
+                        size: 50,
+                      ),
+                      SizedBox(width: 15,),
+                      Text("Change Password", style: TextStyle(fontSize: 18, color: iconGreen),),
+                    ],
+                  ),
                 ),
                 Row(
                   // crossAxisAlignment: CrossAxisAlignment.end,

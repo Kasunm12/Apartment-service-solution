@@ -1,8 +1,8 @@
 import 'package:apartment_service_solution/screens/homescreen.dart';
-import 'package:apartment_service_solution/screens/splashscreen.dart';
+import '../screens/profilescreen.dart';
 
 List pageList = [
   HomePage(),
-  SplashScreen(),
+  ProfilePage(),
   HomePage()
 ];
