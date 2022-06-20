@@ -1,7 +1,17 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../constants/baseAPI.dart';
 import '../constants/colors.dart';
 import '../widgets/bottomnavbar.dart';
+
+String token = '';
+String id = '';
+String name = '';
+String email = '';
+String password = '';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,6 +21,61 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  Future LoginData() async {
+    try {
+      var response = await Dio().post(Base_API + '/resident/login', data: {
+        "email": email,
+        "password": password
+      });
+      token = response.data['tokenObject']['token'];
+      id = response.data["tokenObject"]["sub"]["id"];
+      name = response.data["tokenObject"]["sub"]["name"];
+      email = response.data["tokenObject"]["sub"]["email"];
+      if (response.data["success"] == true) {
+        Get.snackbar(
+          "success",
+          "logged in successfully",
+          backgroundColor: Colors.deepPurple,
+          colorText: Colors.white,
+          borderWidth: 1,
+          borderColor: Colors.grey,
+        );
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => BottomNavBar(),
+          ),
+          (route) => false,
+        );
+      } else {
+        Get.snackbar(
+          "error",
+          "Please check your username or password again",
+          backgroundColor: Colors.deepPurple,
+          colorText: Colors.white,
+          borderWidth: 1,
+          borderColor: Colors.grey,
+        );
+      }
+      print("res: $response");
+      print(id);
+      print(name);
+      print(token);
+    } catch (e) {
+      Get.snackbar("Error", "Please check your username or password again",
+          backgroundColor: Colors.deepPurple,
+          borderWidth: 1,
+          borderColor: Colors.grey,
+          colorText: Colors.white,
+          icon: Icon(
+            Icons.error_outline_outlined,
+            color: Colors.red,
+            size: 30,
+          ));
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +120,13 @@ class _LoginPageState extends State<LoginPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
-                        maxLength: 12,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Enter Username',
+                          hintText: 'Enter your Email',
                         ),
+                        onChanged: (String? text) {
+                          email = text!;
+                        },
                       ),
                     ),
                   ),
@@ -82,6 +149,9 @@ class _LoginPageState extends State<LoginPage> {
                           border: InputBorder.none,
                           hintText: 'Enter Password',
                         ),
+                        onChanged: (String? text) {
+                          password = text!;
+                        },
                       ),
                     ),
                   ),
@@ -92,10 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => BottomNavBar()),
-                      );
+                      LoginData();
                     },
                     child: Container(
                       padding: EdgeInsets.all(20),
@@ -116,7 +183,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-
                 SizedBox(height: 20),
                 // not a members ? Register now section field
                 Row(

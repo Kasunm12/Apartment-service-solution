@@ -1,3 +1,4 @@
+import 'package:apartment_service_solution/screens/login.dart';
 import 'package:apartment_service_solution/screens/my_information.dart';
 import 'package:apartment_service_solution/screens/password_change.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
           SizedBox(height: 10,),
-          Text("Sadali Fernando", style: TextStyle(fontSize: 26, color: iconGreen),),
+          Text(name, style: TextStyle(fontSize: 26, color: iconGreen),),
           SizedBox(height: height/5,),
           Padding(
             padding: const EdgeInsets.only( left: 30, right: 30, bottom: 20),

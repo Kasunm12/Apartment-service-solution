@@ -1,7 +1,9 @@
+import 'package:apartment_service_solution/screens/login.dart';
 import 'package:apartment_service_solution/screens/my_information_edit.dart';
 import 'package:flutter/material.dart';
-
 import '../constants/colors.dart';
+
+
 
 class MyInformation extends StatefulWidget {
   const MyInformation({Key? key}) : super(key: key);
@@ -56,7 +58,7 @@ class _MyInformationState extends State<MyInformation> {
             height: 10,
           ),
           Text(
-            "Sadali Fernando",
+            name,
             style: TextStyle(fontSize: 26, color: iconGreen),
           ),
           SizedBox(
@@ -120,7 +122,7 @@ class _MyInformationState extends State<MyInformation> {
                             style: TextStyle(fontSize: 18, color: Colors.grey),
                           )),
                           Text(
-                            "Family Profile",
+                            name,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -138,9 +140,16 @@ class _MyInformationState extends State<MyInformation> {
                                 "Resident ID",
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
-                          Text(
-                            "Family Profile",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          Flexible(
+                            child: RichText(
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1, // this will show dots(...) after 1 lines
+                              strutStyle: StrutStyle(fontSize: 12.0),
+                              text: TextSpan(
+                                  style: TextStyle(color: Colors.black, fontSize: 18),
+                                  text: id
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -157,9 +166,16 @@ class _MyInformationState extends State<MyInformation> {
                                 "E-mail",
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
-                          Text(
-                            "Family Profile",
-                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          Flexible(
+                            child: RichText(
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1, // this will show dots(...) after 1 lines
+                              strutStyle: StrutStyle(fontSize: 12.0),
+                              text: TextSpan(
+                                  style: TextStyle(color: Colors.black, fontSize: 18),
+                                  text: email
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -177,7 +193,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "Family Profile",
+                            "15A",
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -196,7 +212,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "Family Profile",
+                            "83/B",
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -215,7 +231,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "Family Profile",
+                            "0768597364",
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -234,7 +250,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "Family Profile",
+                            "980580456v",
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -253,7 +269,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "Family Profile",
+                            "Female",
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -272,7 +288,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "Family Profile",
+                            "1990 / 11 / 20",
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -291,7 +307,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "Family Profile",
+                            "Accountant",
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],

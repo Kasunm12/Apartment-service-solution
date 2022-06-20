@@ -1,3 +1,4 @@
+import 'package:apartment_service_solution/screens/login.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
@@ -56,7 +57,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
               height: 10,
             ),
             Text(
-              "Sadali Fernando",
+              name,
               style: TextStyle(fontSize: 26, color: iconGreen),
             ),
             SizedBox(
@@ -114,13 +115,14 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                               child: TextField(
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                    labelText: 'Enter something',
+                                    labelText: 'Enter Name',
+                                    hintText: name,
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(width: 3, color: Colors.blue),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(width: 3, color: Colors.red),
+                                      borderSide: const BorderSide(width: 3, color: darkblue),
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                               ),
@@ -145,13 +147,14 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                               child: TextField(
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                    labelText: 'Enter something',
+                                    labelText: 'Enter ID',
+                                    hintText: id,
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(width: 3, color: Colors.blue),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(width: 3, color: Colors.red),
+                                      borderSide: const BorderSide(width: 3, color: darkblue),
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                               ),
@@ -171,9 +174,16 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                   "E-mail",
                                   style: TextStyle(fontSize: 18, color: Colors.grey),
                                 )),
-                            Text(
-                              "Family Profile",
-                              style: TextStyle(fontSize: 18, color: Colors.black),
+                            Flexible(
+                              child: RichText(
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2, // this will show dots(...) after 1 lines
+                                strutStyle: StrutStyle(fontSize: 12.0),
+                                text: TextSpan(
+                                    style: TextStyle(color: Colors.black, fontSize: 18),
+                                    text: email
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -191,7 +201,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                   style: TextStyle(fontSize: 18, color: Colors.grey),
                                 )),
                             Text(
-                              "Family Profile",
+                              "15A",
                               style: TextStyle(fontSize: 18, color: Colors.black),
                             ),
                           ],
@@ -214,13 +224,14 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                               child: TextField(
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                    labelText: 'Enter something',
+                                    labelText: 'Enter House No',
+                                    hintText: '83/B',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(width: 3, color: Colors.blue),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(width: 3, color: Colors.red),
+                                      borderSide: const BorderSide(width: 3, color: darkblue),
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                               ),
@@ -245,13 +256,14 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                               child: TextField(
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                    labelText: 'Enter something',
+                                    labelText: 'Enter Phone Number',
+                                    hintText: '0768597364',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(width: 3, color: Colors.blue),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(width: 3, color: Colors.red),
+                                      borderSide: const BorderSide(width: 3, color: darkblue),
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                               ),
@@ -276,13 +288,13 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                               child: TextField(
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                    labelText: 'Enter something',
+                                    labelText: 'Enter NIC',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(width: 3, color: Colors.blue),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(width: 3, color: Colors.red),
+                                      borderSide: const BorderSide(width: 3, color: darkblue),
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                               ),
@@ -307,13 +319,13 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                               child: TextField(
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                    labelText: 'Enter something',
+                                    labelText: 'Enter Gender',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(width: 3, color: Colors.blue),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(width: 3, color: Colors.red),
+                                      borderSide: const BorderSide(width: 3, color: darkblue),
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                               ),
@@ -344,7 +356,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(width: 3, color: Colors.red),
+                                      borderSide: const BorderSide(width: 3, color: darkblue),
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                               ),
@@ -369,13 +381,13 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                               child: TextField(
                                 decoration: InputDecoration(
                                     contentPadding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                    labelText: 'Enter something',
+                                    labelText: 'Enter Occupation',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(width: 3, color: Colors.blue),
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(width: 3, color: Colors.red),
+                                      borderSide: const BorderSide(width: 3, color: darkblue),
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                               ),

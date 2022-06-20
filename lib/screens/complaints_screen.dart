@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:apartment_service_solution/screens/complaint_review.dart';
 import 'package:apartment_service_solution/screens/new_complaint_screen.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/baseAPI.dart';
 import '../constants/colors.dart';
 
 class Complaint extends StatefulWidget {
@@ -12,6 +16,28 @@ class Complaint extends StatefulWidget {
 }
 
 class _ComplaintState extends State<Complaint> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    getdata();
+    super.initState();
+  }
+
+  List Complaints = [];
+  getdata() async {
+    var response;
+    try {
+      response = await Dio().get(Base_API + "/complaint/");
+      Map<String, dynamic> responseJson = json.decode(response.toString());
+      print(responseJson['data']);
+      setState(() {
+        Complaints = responseJson['data'];
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -92,7 +118,7 @@ class _ComplaintState extends State<Complaint> {
               child: ListView.separated(
                   separatorBuilder: (BuildContext context, int index) =>
                       const Divider(),
-                  itemCount: 20,
+                  itemCount: Complaints.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
@@ -101,11 +127,10 @@ class _ComplaintState extends State<Complaint> {
                           MaterialPageRoute(
                               builder: (context) => ComplaintReview(
                                     id: (index + 1).toString(),
-                                    category: 'Electricity',
-                                    description: 'We have power outage since morning only in our block.',
-                                    reply:
-                                        'Power supply would be back within 30 mins',
-                                    status: 'Completed',
+                                    category: Complaints[index]['category'],
+                                    description: Complaints[index]['description'],
+                                    reply:Complaints[index]['reply'] == null ? "" : Complaints[index]['reply'],
+                                    status: Complaints[index]['status'],
                                   )),
                         );
                       },
@@ -125,7 +150,7 @@ class _ComplaintState extends State<Complaint> {
                                 children: [
                                   Text((index + 1).toString() +
                                       " " +
-                                      "Electricity")
+                                      Complaints[index]['category'])
                                 ],
                               ),
                             ),
@@ -153,8 +178,8 @@ class _ComplaintState extends State<Complaint> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text("05/01/22"),
-                                      Text("We  have power outage since ...")
+                                      Text(Complaints[index]['date']),
+                                      Text(Complaints[index]['description'])
                                     ],
                                   ),
                                 )),
