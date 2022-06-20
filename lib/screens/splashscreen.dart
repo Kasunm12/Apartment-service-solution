@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:apartment_service_solution/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -19,7 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 5),
             () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => BottomNavBar())));
+            MaterialPageRoute(builder: (BuildContext context) => LoginPage()
+            )));
     return Scaffold(
         body: Container(
           width: width ,
