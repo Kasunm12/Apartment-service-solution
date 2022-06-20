@@ -1,9 +1,18 @@
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:apartment_service_solution/screens/my_information_edit.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import '../constants/baseAPI.dart';
 import '../constants/colors.dart';
 
-
+String Resident_id = '';
+String Block_number = '';
+String House_number = '';
+String Phone_number = '';
+String NIC = '';
+String Gender = '';
+String DOB = '';
+String Occupation = '';
 
 class MyInformation extends StatefulWidget {
   const MyInformation({Key? key}) : super(key: key);
@@ -13,6 +22,37 @@ class MyInformation extends StatefulWidget {
 }
 
 class _MyInformationState extends State<MyInformation> {
+
+  Future myinfor()  async{
+    try {
+      var response = await Dio().get(Base_API + "/resident/"+id,
+          options: Options(headers: {
+            'Authorization': token, //HEADERS
+          }));
+      setState(() {
+        name = response.data['data']['name'];
+        email = response.data['data']['email'];
+        Resident_id = response.data['data']['resident_id'];
+        Block_number = response.data['data']['block_number'];
+        House_number = response.data['data']['house_number'];
+        Phone_number = response.data['data']['phone_number'];
+        NIC = response.data['data']['nic'];
+        Gender = response.data['data']['gender'];
+        DOB = response.data['data']['dob'];
+        Occupation = response.data['data']['occupation'];
+      });
+    } on DioError catch (e) {
+      debugPrint("error:${e.toString()}");
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    myinfor();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -147,7 +187,7 @@ class _MyInformationState extends State<MyInformation> {
                               strutStyle: StrutStyle(fontSize: 12.0),
                               text: TextSpan(
                                   style: TextStyle(color: Colors.black, fontSize: 18),
-                                  text: id
+                                  text: Resident_id
                               ),
                             ),
                           ),
@@ -193,7 +233,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "15A",
+                            Block_number,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -212,7 +252,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "83/B",
+                            House_number,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -231,7 +271,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "0768597364",
+                            Phone_number,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -250,7 +290,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "980580456v",
+                            NIC,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -269,7 +309,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "Female",
+                            Gender,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -288,7 +328,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "1990 / 11 / 20",
+                            DOB,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],
@@ -307,7 +347,7 @@ class _MyInformationState extends State<MyInformation> {
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
                           Text(
-                            "Accountant",
+                            Occupation,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         ],

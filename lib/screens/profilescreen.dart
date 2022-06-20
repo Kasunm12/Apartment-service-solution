@@ -125,17 +125,27 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
                 ),
-                Row(
-                  // crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    ImageIcon(
-                      AssetImage("assets/icons/signout.png"),
-                      color: iconGreen,
-                      size: 50,
-                    ),
-                    SizedBox(width: 15,),
-                    Text("Sign Out", style: TextStyle(fontSize: 18, color: iconGreen),),
-                  ],
+                InkWell(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                          const LoginPage()),
+                    );
+                  },
+                  child: Row(
+                    // crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      ImageIcon(
+                        AssetImage("assets/icons/signout.png"),
+                        color: iconGreen,
+                        size: 50,
+                      ),
+                      SizedBox(width: 15,),
+                      Text("Sign Out", style: TextStyle(fontSize: 18, color: iconGreen),),
+                    ],
+                  ),
                 ),
               ],
             )

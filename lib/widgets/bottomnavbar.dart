@@ -55,7 +55,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   AssetImage("assets/icons/Bnavright.png"),
                   color: iconGreen,
                   size: 50,
-                ), title: 'Search'),
+                ), title: 'Services'),
               ],
             ))
     );

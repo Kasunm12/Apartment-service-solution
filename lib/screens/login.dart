@@ -27,10 +27,12 @@ class _LoginPageState extends State<LoginPage> {
         "email": email,
         "password": password
       });
-      token = response.data['tokenObject']['token'];
-      id = response.data["tokenObject"]["sub"]["id"];
-      name = response.data["tokenObject"]["sub"]["name"];
-      email = response.data["tokenObject"]["sub"]["email"];
+      setState(() {
+        token = response.data['tokenObject']['token'];
+        id = response.data["tokenObject"]["sub"]["id"];
+        name = response.data["tokenObject"]["sub"]["name"];
+        email = response.data["tokenObject"]["sub"]["email"];
+      });
       if (response.data["success"] == true) {
         Get.snackbar(
           "success",

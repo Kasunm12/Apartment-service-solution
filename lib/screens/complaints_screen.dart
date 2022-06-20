@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:apartment_service_solution/screens/complaint_review.dart';
+import 'package:apartment_service_solution/screens/login.dart';
 import 'package:apartment_service_solution/screens/new_complaint_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +25,15 @@ class _ComplaintState extends State<Complaint> {
   }
 
   List Complaints = [];
+
   getdata() async {
     var response;
     try {
-      response = await Dio().get(Base_API + "/complaint/");
+      response = await Dio().get(Base_API + "/complaint/getComplaintByResidentId",
+          options: Options(headers: {
+            'Authorization': token, //HEADERS
+          })
+      );
       Map<String, dynamic> responseJson = json.decode(response.toString());
       print(responseJson['data']);
       setState(() {
@@ -127,10 +133,10 @@ class _ComplaintState extends State<Complaint> {
                           MaterialPageRoute(
                               builder: (context) => ComplaintReview(
                                     id: (index + 1).toString(),
-                                    category: Complaints[index]['category'],
-                                    description: Complaints[index]['description'],
+                                    category: Complaints[index]['category'] == null ? "" :Complaints[index]['category'],
+                                    description: Complaints[index]['description'] == null ? "" :Complaints[index]['description'],
                                     reply:Complaints[index]['reply'] == null ? "" : Complaints[index]['reply'],
-                                    status: Complaints[index]['status'],
+                                    status: Complaints[index]['Status'] == null ? "" :Complaints[index]['Status'],
                                   )),
                         );
                       },
