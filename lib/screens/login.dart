@@ -61,6 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left:20.0),
                     child: TextField(
+                      maxLength: 12,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Enter Username',
@@ -105,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Container(
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.deepPurple,
+                    color: Colors.lightBlue,
                     borderRadius: BorderRadius.circular(12),
                     ),
                   child: Center(
@@ -139,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                           'Please Register Now',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.lightBlueAccent,
                             fontWeight: FontWeight.bold,
                             
                             ),
