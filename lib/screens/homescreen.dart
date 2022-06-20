@@ -1,4 +1,7 @@
+import 'package:apartment_service_solution/screens/complaints_screen.dart';
 import 'package:apartment_service_solution/screens/profilescreen.dart';
+import 'package:apartment_service_solution/screens/services_screen.dart';
+import 'package:apartment_service_solution/screens/viewing_utility_bills.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -84,7 +87,12 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: height*0.015,),
               InkWell(
                 onTap: (){
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Complaint()),
+                  );
                 },
                 child: Container(
                     decoration: BoxDecoration(
@@ -144,7 +152,12 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: height*0.015,),
               InkWell(
                 onTap: (){
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ViewingUtilityBills()),
+                  );
                 },
                 child: Container(
                     decoration: BoxDecoration(
@@ -174,7 +187,12 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: height*0.015,),
               InkWell(
                 onTap: (){
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Services()),
+                  );
                 },
                 child: Container(
                     decoration: BoxDecoration(
