@@ -7,7 +7,8 @@ import '../constants/baseAPI.dart';
 import '../constants/colors.dart';
 
 class ViewServices extends StatefulWidget {
-  const ViewServices({Key? key}) : super(key: key);
+  final String category;
+  const ViewServices({Key? key, required this.category}) : super(key: key);
 
   @override
   _ViewServicesState createState() => _ViewServicesState();
@@ -22,7 +23,7 @@ class _ViewServicesState extends State<ViewServices> {
     try {
       var response = await Dio().post(Base_API + "/service/create",
           data: {
-            "service_category": "Cleaning",
+            "service_category": widget.category,
             "day": Date,
             "time_slot": Time,
             "member": person,
@@ -55,7 +56,7 @@ class _ViewServicesState extends State<ViewServices> {
               ),
               Row(
                 children: [
-                  Text("Service  Profiles - Cooking",
+                  Text("Service  Profiles - "+ widget.category,
                       style: TextStyle(fontSize: 24, color: iconGreen)),
                 ],
               ),

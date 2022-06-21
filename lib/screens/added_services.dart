@@ -59,7 +59,7 @@ class _RequestedServicesState extends State<RequestedServices> {
   Future cooking() async {
     try {
       var response =
-          await Dio().get(Base_API + "/service/getCleaningServicesByResidentId",
+          await Dio().get(Base_API + "/service/getCookingServicesByResidentId",
               options: Options(headers: {
                 'Authorization': token, //HEADERS
               }));
@@ -78,7 +78,7 @@ class _RequestedServicesState extends State<RequestedServices> {
   Future washing() async {
     try {
       var response =
-          await Dio().get(Base_API + "/service/getCleaningServicesByResidentId",
+          await Dio().get(Base_API + "/service/getWashingServicesByResidentId",
               options: Options(headers: {
                 'Authorization': token, //HEADERS
               }));
@@ -86,7 +86,7 @@ class _RequestedServicesState extends State<RequestedServices> {
       print("****************");
       print(responseJson['data']);
       setState(() {
-        CleaningList = responseJson['data'];
+        WashingList = responseJson['data'];
       });
       print(response);
     } on DioError catch (e) {
@@ -283,7 +283,7 @@ class _RequestedServicesState extends State<RequestedServices> {
                 child: ListView.separated(
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(),
-                    itemCount: 10,
+                    itemCount: WashingList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         height: 50,

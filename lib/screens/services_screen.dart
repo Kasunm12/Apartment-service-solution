@@ -105,7 +105,7 @@ class _ServicesState extends State<Services> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ViewServices()),
+                      MaterialPageRoute(builder: (context) => const ViewServices(category: 'COOKING',)),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -132,7 +132,7 @@ class _ServicesState extends State<Services> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ViewServices()),
+                      MaterialPageRoute(builder: (context) => const ViewServices(category: 'WASHING',)),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -159,7 +159,7 @@ class _ServicesState extends State<Services> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ViewServices()),
+                      MaterialPageRoute(builder: (context) => const ViewServices(category: 'CLEANING',)),
                     );
                   },
                   style: ElevatedButton.styleFrom(
