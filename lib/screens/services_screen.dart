@@ -1,3 +1,4 @@
+import 'package:apartment_service_solution/screens/view_services_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
@@ -102,10 +103,10 @@ class _ServicesState extends State<Services> {
                 ElevatedButton(
                   child: Text('VIEW'),
                   onPressed: () {
-                    /*Navigator.push(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const NewComplaint()),
-                    );*/
+                      MaterialPageRoute(builder: (context) => const ViewServices(category: 'COOKING',)),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: blue,
@@ -129,10 +130,10 @@ class _ServicesState extends State<Services> {
                 ElevatedButton(
                   child: Text('VIEW'),
                   onPressed: () {
-                    /*Navigator.push(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const NewComplaint()),
-                    );*/
+                      MaterialPageRoute(builder: (context) => const ViewServices(category: 'WASHING',)),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: blue,
@@ -156,10 +157,10 @@ class _ServicesState extends State<Services> {
                 ElevatedButton(
                   child: Text('VIEW'),
                   onPressed: () {
-                    /*Navigator.push(
+                    Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const NewComplaint()),
-                    );*/
+                      MaterialPageRoute(builder: (context) => const ViewServices(category: 'CLEANING',)),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: blue,

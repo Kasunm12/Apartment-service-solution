@@ -110,7 +110,7 @@ class _ComplaintReviewState extends State<ComplaintReview> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Reply : "+ widget.reply,
+                       "Reply : "+ widget.reply,
                       style: TextStyle(fontSize: 18),
                     ),
                     SizedBox(

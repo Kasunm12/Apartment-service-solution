@@ -160,6 +160,17 @@ class _PasswordChangeState extends State<PasswordChange> {
                       )
                     ],
                   ),
+                  SizedBox(height: 100,),
+                  ElevatedButton(
+                    child: Text('UPDATE'),
+                    onPressed: () {
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: buttonGreen,
+                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                      textStyle: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ],
               ),
             ),

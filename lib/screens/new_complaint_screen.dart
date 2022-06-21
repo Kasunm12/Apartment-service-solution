@@ -1,5 +1,9 @@
+import 'package:apartment_service_solution/screens/complaints_screen.dart';
+import 'package:apartment_service_solution/screens/login.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/baseAPI.dart';
 import '../constants/colors.dart';
 
 class NewComplaint extends StatefulWidget {
@@ -10,6 +14,26 @@ class NewComplaint extends StatefulWidget {
 }
 
 class _NewComplaintState extends State<NewComplaint> {
+  String Description = '';
+  String Category = '';
+
+  Future addComplaint() async {
+    try {
+      var response = await Dio().post(Base_API + "/complaint/create",
+          data: {"category": Category, "description": Description},
+          options: Options(headers: {
+            'Authorization': token, //HEADERS
+          }));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Complaint()),
+      );
+      print(response);
+    } on DioError catch (e) {
+      debugPrint("error:${e.toString()}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -75,7 +99,9 @@ class _NewComplaintState extends State<NewComplaint> {
                           child: Text(value),
                         );
                       }).toList(),
-                      onChanged: (_) {},
+                      onChanged: (String? text) {
+                        Category = text!;
+                      },
                     )),
                 SizedBox(
                   height: height / 5,
@@ -110,25 +136,24 @@ class _NewComplaintState extends State<NewComplaint> {
                     ),
                     minLines: 1, //Normal textInputField will be displayed
                     maxLines: 5, // when user presses enter it will adapt to it
+                    onChanged: (String? text) {
+                      Description = text!;
+                    },
                   ),
                 ),
-                SizedBox(height: height*0.2,),
+                SizedBox(
+                  height: height * 0.2,
+                ),
                 ElevatedButton(
                   child: Text('Submit'),
                   onPressed: () {
-                   /* Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                          const NewComplaint()),
-                    );*/
+                    addComplaint();
                   },
-                  style:  ElevatedButton.styleFrom(
+                  style: ElevatedButton.styleFrom(
                     primary: buttonGreen,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    textStyle: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold),
+                    textStyle:
+                        TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 )
               ],
