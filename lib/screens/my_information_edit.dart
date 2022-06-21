@@ -44,31 +44,12 @@ class _MyInformationEditState extends State<MyInformationEdit> {
           options: Options(headers: {
             'Authorization': token, //HEADERS
           }));
-      await myinfor();
-      print(response);
-    } on DioError catch (e) {
-      debugPrint("error:${e.toString()}");
-    }
-  }
-
-  Future myinfor()  async{
-    try {
-      var response = await Dio().get(Base_API + "/resident/62b0a8d6668575cf5c2a1e59",//+id,
-          options: Options(headers: {
-            'Authorization': token, //HEADERS
-          }));
-      setState(() {
-        name = response.data['data']['name'];
-        email = response.data['data']['email'];
-        Resident_id = response.data['data']['resident_id'];
-        Block_number = response.data['data']['block_number'];
-        House_number = response.data['data']['house_number'];
-        Phone_number = response.data['data']['phone_number'];
-        NIC = response.data['data']['nic'];
-        Gender = response.data['data']['gender'];
-        DOB = response.data['data']['dob'];
-        Occupation = response.data['data']['occupation'];
-      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+            const MyInformation()),
+      );
       print(response);
     } on DioError catch (e) {
       debugPrint("error:${e.toString()}");
