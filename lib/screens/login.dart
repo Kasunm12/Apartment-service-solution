@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
-                        maxLength: 12,
+                        // maxLength: 12,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter Username',
@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 20),
                 // not a members ? Register now section field
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
                       'Forgot password ? ',
@@ -131,6 +131,30 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
+                SizedBox(height: 20),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Not a Member? ',
+                      style: TextStyle(
+
+                        fontWeight: FontWeight.bold,
+
+                      ),
+                    ),
+
+                    Text(
+                      'Please Register Now',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

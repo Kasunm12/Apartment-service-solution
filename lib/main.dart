@@ -2,6 +2,7 @@ import 'package:apartment_service_solution/screens/addedservices.dart';
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:apartment_service_solution/screens/previousutilitybills.dart';
 import 'package:apartment_service_solution/screens/splashscreen.dart';
+import 'package:apartment_service_solution/screens/servicesdropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AddedServices(),
+      home: LoginPage(),
     );
   }
 }

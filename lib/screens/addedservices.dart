@@ -13,54 +13,54 @@ class _AddedServicesState extends State<AddedServices> {
     return Scaffold(
 
       backgroundColor: Colors.white,
-      body: Column(
-        
+      body: ListView(
+
         children: [
           // icon:Icon(
-                  //   Icons.calendar_month,
-                  //   color:Colors.green,
-                  //   size: 20,
-                  // )
+          //   Icons.calendar_month,
+          //   color:Colors.green,
+          //   size: 20,
+          // )
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            
+
             child: Row(
-            mainAxisAlignment:MainAxisAlignment.start,
-            children: [
-              
-              Column(
-                //crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment:MainAxisAlignment.start,
-                  children: [ 
-                     Icon(Icons.arrow_back), 
+              mainAxisAlignment:MainAxisAlignment.start,
+              children: [
 
-                     SizedBox(height: 20),        
-                Text(
-                  "Requested Services",
-                  
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color.fromARGB(255, 11, 221, 64),
-                    fontWeight: FontWeight.bold
+                Column(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment:MainAxisAlignment.start,
+                  children: [
+                    Icon(Icons.arrow_back),
+
+                    SizedBox(height: 20),
+                    Text(
+                      "Requested Services",
+
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 11, 221, 64),
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
-                  ),
 
 
+                  ],
+                )
               ],
-              )
-            ],
             ),
           ),
 
-          SizedBox(height: 50),
+          SizedBox(height: 30),
 
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 248, 245, 245),
-                borderRadius: BorderRadius.circular(12)),
+                  color: Color.fromARGB(255, 248, 245, 245),
+                  borderRadius: BorderRadius.circular(12)),
               child:Row(
                 children:[
 
@@ -70,40 +70,288 @@ class _AddedServicesState extends State<AddedServices> {
 
                       children: [
                         Text(
-                          "Cooking",
+                          "COOKING",
                           style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold
-                        ),
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
                           ),
+                        ),
 
-                          SizedBox(height: 20),
+                        SizedBox(height: 20),
 
-                          Text(
-                              "Monday 8-12",
-                              style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,       
-                        ),
+                        Text(
+                          "Monday 8-12",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
                           ),
-                          SizedBox(height: 10),
-                          Text(
-                              "Tuesday 2-5",
-                              style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,       
                         ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Tuesday 2-5",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
                           ),
+                        ),
 
-                           SizedBox(height: 10),
-                          Text(
-                              "Wdnesday 8-12",
-                              style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,       
-                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Wdnesday 8-12",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
                           ),
+                        ),
+                      ],
+                    ),
+                  )
+
+                ],
+              ),
+            ),
+          ),
+
+          //=======================================================================
+
+          SizedBox(height: 20),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 248, 245, 245),
+                  borderRadius: BorderRadius.circular(12)),
+              child:Row(
+                children:[
+
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
+                      children: [
+                        Text(
+                          "WASHING",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        Text(
+                          "Monday 8-12",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Tuesday 2-5",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+
+                        SizedBox(height: 10),
+                        Text(
+                          "Wdnesday 8-12",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+
+                ],
+              ),
+            ),
+          ),
+//===================================================================================
+          SizedBox(height:20),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 248, 245, 245),
+                  borderRadius: BorderRadius.circular(12)),
+              child:Row(
+                children:[
+
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
+                      children: [
+                        Text(
+                          "CLEANING",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        Text(
+                          "Monday 8-12",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Tuesday 2-5",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+
+                        SizedBox(height: 10),
+                        Text(
+                          "Wdnesday 8-12",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+
+                ],
+              ),
+            ),
+          ),
+
+          //=======================================================================
+
+          SizedBox(height: 20),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 248, 245, 245),
+                  borderRadius: BorderRadius.circular(12)),
+              child:Row(
+                children:[
+
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
+                      children: [
+                        Text(
+                          "WASHING",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        Text(
+                          "Monday 8-12",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Tuesday 2-5",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+
+                        SizedBox(height: 10),
+                        Text(
+                          "Wdnesday 8-12",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+
+                ],
+              ),
+            ),
+          ),
+//===================================================================================
+          SizedBox(height:20),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 248, 245, 245),
+                  borderRadius: BorderRadius.circular(12)),
+              child:Row(
+                children:[
+
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
+                      children: [
+                        Text(
+                          "CLEANING",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+
+                        Text(
+                          "Monday 8-12",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Tuesday 2-5",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+
+                        SizedBox(height: 10),
+                        Text(
+                          "Wdnesday 8-12",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
                       ],
                     ),
                   )
@@ -114,7 +362,7 @@ class _AddedServicesState extends State<AddedServices> {
           ),
         ],
       ),
-      
+
 
     );
   }
