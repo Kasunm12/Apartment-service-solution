@@ -15,8 +15,6 @@ class MyInformationEdit extends StatefulWidget {
 
 class _MyInformationEditState extends State<MyInformationEdit> {
   String _name = name;
-  String _id = Resident_id;
-  String _email = email;
   String _blockNo = Block_number;
   String _houseNo = House_number;
   String _phoneNo = Phone_number;
@@ -30,8 +28,8 @@ class _MyInformationEditState extends State<MyInformationEdit> {
       var response = await Dio().put(Base_API + "/resident/"+id,
           data: {
             "name" : _name,
-            "resident_id" : _id,
-            "email" : _email,
+            "resident_id" : Resident_id,
+            "email" : email,
             "block_number" : _blockNo,
             "house_number" : _houseNo,
             "phone_number" : _phoneNo,
@@ -163,7 +161,6 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                     contentPadding:
                                         EdgeInsets.fromLTRB(15, 5, 15, 5),
                                     labelText: 'Enter Name',
-                                    hintText: name,
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           width: 3, color: Colors.blue),
@@ -197,26 +194,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                 )),
                             Container(
                               width: (width / 3) * 2 - 60,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                    labelText: 'Enter ID',
-                                    hintText: _id,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          width: 3, color: Colors.blue),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          width: 3, color: darkblue),
-                                      borderRadius: BorderRadius.circular(15),
-                                    )),
-                                onChanged: (String? text) {
-                                  _id = text!;
-                                },
-                              ),
+                              child: Text(Resident_id),
                             ),
                           ],
                         ),
@@ -236,26 +214,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                 )),
                             Container(
                               width: (width / 3) * 2 - 60,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    contentPadding:
-                                    EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                    labelText: 'E-mail',
-                                    hintText: _email,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          width: 3, color: Colors.blue),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          width: 3, color: darkblue),
-                                      borderRadius: BorderRadius.circular(15),
-                                    )),
-                                onChanged: (String? text) {
-                                  _email = text!;
-                                },
-                              ),
+                              child: Text(email),
                             ),
                           ],
                         ),
@@ -280,7 +239,6 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                     contentPadding:
                                     EdgeInsets.fromLTRB(15, 5, 15, 5),
                                     labelText: 'Block No',
-                                    hintText: _blockNo,
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           width: 3, color: Colors.blue),
@@ -319,7 +277,6 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                     contentPadding:
                                         EdgeInsets.fromLTRB(15, 5, 15, 5),
                                     labelText: 'Enter House No',
-                                    hintText: '83/B',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           width: 3, color: Colors.blue),
@@ -358,7 +315,6 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                     contentPadding:
                                         EdgeInsets.fromLTRB(15, 5, 15, 5),
                                     labelText: 'Enter Phone Number',
-                                    hintText: '0768597364',
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                           width: 3, color: Colors.blue),
@@ -430,26 +386,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                 )),
                             Container(
                               width: (width / 3) * 2 - 60,
-                              child: /*TextField(
-                                decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                    labelText: 'Enter Gender',
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          width: 3, color: Colors.blue),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          width: 3, color: darkblue),
-                                      borderRadius: BorderRadius.circular(15),
-                                    )),
-                                onChanged: (String? text) {
-                                  _Gender = text!;
-                                },
-                              ),*/
-                              new DropdownButton<String>(
+                              child: new DropdownButton<String>(
                                 hint: Text("Status"),
                                 value: _Gender,
                                 items: <String>[

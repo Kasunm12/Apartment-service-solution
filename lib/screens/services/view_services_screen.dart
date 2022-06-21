@@ -1,8 +1,8 @@
+import 'dart:convert';
 import 'package:apartment_service_solution/screens/services/added_services.dart';
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
 import '../../constants/baseAPI.dart';
 import '../../constants/colors.dart';
 
@@ -18,6 +18,9 @@ class _ViewServicesState extends State<ViewServices> {
   String Date = 'Monday';
   String Time = '08-12';
   String person = 'Saman';
+  List memberCook = [];
+  List memberWash = [];
+  List memberClean = [];
 
   Future addServices() async {
     try {
@@ -41,6 +44,70 @@ class _ViewServicesState extends State<ViewServices> {
     }
   }
 
+  Future getmemberCooking() async {
+    try {
+      var response =
+      await Dio().get(Base_API + "/servicemember/getMembersForCooking",
+          options: Options(headers: {
+            'Authorization': token, //HEADERS
+          }));
+      Map<String, dynamic> responseJson = json.decode(response.toString());
+      print("****************");
+      print(responseJson['data']);
+      setState(() {
+        memberCook = responseJson['data'];
+      });
+    } on DioError catch (e) {
+      debugPrint("error:${e.toString()}");
+    }
+  }
+  Future getmemberWashing() async {
+    try {
+      var response =
+      await Dio().get(Base_API + "/servicemember/getMembersForWashing",
+          options: Options(headers: {
+            'Authorization': token, //HEADERS
+          }));
+      Map<String, dynamic> responseJson = json.decode(response.toString());
+      print("****************");
+      print(responseJson['data']);
+      setState(() {
+        memberWash = responseJson['data'];
+      });
+    } on DioError catch (e) {
+      debugPrint("error:${e.toString()}");
+    }
+  }
+  Future getmemberCleaning() async {
+    try {
+      var response =
+      await Dio().get(Base_API + "/servicemember/getMembersForCleaning",
+          options: Options(headers: {
+            'Authorization': token, //HEADERS
+          }));
+      Map<String, dynamic> responseJson = json.decode(response.toString());
+      print("****************");
+      print(responseJson['data']);
+      setState(() {
+        memberClean = responseJson['data'];
+      });
+    } on DioError catch (e) {
+      debugPrint("error:${e.toString()}");
+    }
+  }
+
+  listget() async{
+    await getmemberCooking();
+    await getmemberWashing();
+    await getmemberCleaning();
+  }
+
+  @override
+  void initState() {
+    listget();
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -109,25 +176,7 @@ class _ViewServicesState extends State<ViewServices> {
                       });
                     },
                   )
-                  /*DropdownButton<String>(
-                    items: <String>[
-                      'Monday',
-                      'Tuesday',
-                      'Wdnesday',
-                      'Thursday',
-                      'Friday',
-                      'Saturday',
-                      'Sunday'
-                    ].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? text) {
-                      Date = text!;
-                    },
-                  )*/),
+                 ),
               SizedBox(
                 height: 60,
               ),
@@ -163,20 +212,6 @@ class _ViewServicesState extends State<ViewServices> {
                       });
                     },
                   )
-                  /*DropdownButton<String>(
-                    items: <String>[
-                      '08-12',
-                      '2-5',
-                    ].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? text) {
-                      Time = text!;
-                    },
-                  )),*/
               ),
               SizedBox(
                 height: 60,
@@ -213,21 +248,6 @@ class _ViewServicesState extends State<ViewServices> {
                       });
                     },
                   )
-                  /*DropdownButton<String>(
-                    items: <String>[
-                      'Saman',
-                      'Nimal',
-                      'Sunil',
-                    ].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? text) {
-                      person = text!;
-                    },
-                  )*/
               ),
               SizedBox(
                 height: 100,

@@ -15,6 +15,34 @@ class RequestedServices extends StatefulWidget {
 }
 
 class _RequestedServicesState extends State<RequestedServices> {
+  conform(String Id) async {
+    var response;
+    try {
+      response =
+      await Dio().get(Base_API + "/service/confirm/" + Id,);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => super.widget));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  delete(String Id) async {
+    var response;
+    try {
+      response =
+      await Dio().delete(Base_API + "/service/" + Id,);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => super.widget));
+    } catch (e) {
+      print(e);
+    }
+  }
+
   getdata() async {
     var response;
     try {
@@ -94,7 +122,7 @@ class _RequestedServicesState extends State<RequestedServices> {
     }
   }
 
-  loading() async{
+  loading() async {
     await cleaning();
     await cooking();
     await washing();
@@ -155,41 +183,49 @@ class _RequestedServicesState extends State<RequestedServices> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                                width: width / 3 - 60, child: Text(CookingList[index]['day'])),
+                                width: width / 3 - 60,
+                                child: Text(CookingList[index]['day'])),
                             Container(
-                                width: width / 3 - 60, child: Text(CookingList[index]['time_slot'])),
+                                width: width / 3 - 60,
+                                child: Text(CookingList[index]['time_slot'])),
                             Container(
                                 child: Row(
-                                  children: [
-                                    ElevatedButton(
-                                      child: Text('Confirm'),
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                        primary: buttonGreen,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 15),
-                                        textStyle: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    ElevatedButton(
-                                      child: Text('Cancel'),
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                        primary: buttonGreen,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 15),
-                                        textStyle: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                ))
+                              children: [
+                                ElevatedButton(
+                                  child: Text(CookingList[index]['status'] == 'Confirmed'? 'Confirmed' :'Confirm'),
+                                  onPressed: () {
+                                    conform(CookingList[index]['_id']);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: buttonGreen,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 15),
+                                    textStyle: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                CookingList[index]['status'] == 'Confirmed'?
+                                Container():
+                                ElevatedButton(
+                                  child: Text('Cancel'),
+                                  onPressed: () {
+                                    delete(CookingList[index]['_id']);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: buttonGreen,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 15),
+                                    textStyle: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ))
                           ],
                         ),
                       );
@@ -229,36 +265,42 @@ class _RequestedServicesState extends State<RequestedServices> {
                                 child: Text(CleaningList[index]['time_slot'])),
                             Container(
                                 child: Row(
-                              children: [
-                                ElevatedButton(
-                                  child: Text('Confirm'),
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    primary: buttonGreen,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 15),
-                                    textStyle: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                ElevatedButton(
-                                  child: Text('Cancel'),
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    primary: buttonGreen,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 15),
-                                    textStyle: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                            ))
+                                  children: [
+                                    ElevatedButton(
+                                      child: Text(CleaningList[index]['status'] == 'Confirmed'? 'Confirmed' :'Confirm'),
+                                      onPressed: () {
+                                        conform(CleaningList[index]['_id']);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: buttonGreen,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 15),
+                                        textStyle: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    CleaningList[index]['status'] == 'Confirmed'?
+                                    Container():
+                                    ElevatedButton(
+                                      child: Text('Cancel'),
+                                      onPressed: () {
+                                        delete(CleaningList[index]['_id']);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: buttonGreen,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 15),
+                                        textStyle: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ))
                           ],
                         ),
                       );
@@ -291,15 +333,19 @@ class _RequestedServicesState extends State<RequestedServices> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                                width: width / 3 - 60, child: Text(WashingList[index]['day'])),
+                                width: width / 3 - 60,
+                                child: Text(WashingList[index]['day'])),
                             Container(
-                                width: width / 3 - 60, child: Text(WashingList[index]['time_slot'])),
+                                width: width / 3 - 60,
+                                child: Text(WashingList[index]['time_slot'])),
                             Container(
                                 child: Row(
                                   children: [
                                     ElevatedButton(
-                                      child: Text('Confirm'),
-                                      onPressed: () {},
+                                      child: Text(WashingList[index]['status'] == 'Confirmed'? 'Confirmed' :'Confirm'),
+                                      onPressed: () {
+                                        conform(WashingList[index]['_id']);
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         primary: buttonGreen,
                                         padding: EdgeInsets.symmetric(
@@ -312,9 +358,13 @@ class _RequestedServicesState extends State<RequestedServices> {
                                     SizedBox(
                                       width: 20,
                                     ),
+                                    WashingList[index]['status'] == 'Confirmed'?
+                                    Container():
                                     ElevatedButton(
                                       child: Text('Cancel'),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        delete(WashingList[index]['_id']);
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         primary: buttonGreen,
                                         padding: EdgeInsets.symmetric(
