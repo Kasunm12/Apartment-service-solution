@@ -31,7 +31,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
           data: {
             "name" : _name,
             "resident_id" : _id,
-            "email" : "bghostsproductions97@gmail.com",
+            "email" : _email,
             "block_number" : Block_number,
             "house_number" : _houseNo,
             "phone_number" : _phoneNo,
@@ -53,7 +53,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
 
   Future myinfor()  async{
     try {
-      var response = await Dio().get(Base_API + "/resident/"+id,
+      var response = await Dio().get(Base_API + "/resident/62b0a8d6668575cf5c2a1e59",//+id,
           options: Options(headers: {
             'Authorization': token, //HEADERS
           }));
@@ -69,6 +69,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
         DOB = response.data['data']['dob'];
         Occupation = response.data['data']['occupation'];
       });
+      print(response);
     } on DioError catch (e) {
       debugPrint("error:${e.toString()}");
     }
@@ -248,7 +249,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                             Container(
                                 width: width / 3,
                                 child: Text(
-                                  "Resident ID",
+                                  "E-mail",
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.grey),
                                 )),
@@ -287,7 +288,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                             Container(
                                 width: width / 3,
                                 child: Text(
-                                  "Resident ID",
+                                  "Block No",
                                   style: TextStyle(
                                       fontSize: 18, color: Colors.grey),
                                 )),
