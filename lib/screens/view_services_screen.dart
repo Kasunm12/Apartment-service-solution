@@ -1,6 +1,9 @@
 import 'package:apartment_service_solution/screens/added_services.dart';
+import 'package:apartment_service_solution/screens/login.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/baseAPI.dart';
 import '../constants/colors.dart';
 
 class ViewServices extends StatefulWidget {
@@ -11,7 +14,32 @@ class ViewServices extends StatefulWidget {
 }
 
 class _ViewServicesState extends State<ViewServices> {
+  String Date = '';
+  String Time = '';
   String person = '';
+
+  Future addServices() async {
+    try {
+      var response = await Dio().post(Base_API + "/service/create",
+          data: {
+            "service_category": "Cleaning",
+            "day": Date,
+            "time_slot": Time,
+            "member": person,
+          },
+          options: Options(headers: {
+            'Authorization': token, //HEADERS
+          }));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const RequestedServices()),
+      );
+      print(response);
+    } on DioError catch (e) {
+      debugPrint("error:${e.toString()}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -31,7 +59,9 @@ class _ViewServicesState extends State<ViewServices> {
                       style: TextStyle(fontSize: 24, color: iconGreen)),
                 ],
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Row(
                 children: [
                   Text("Check the date & time , Pick your service",
@@ -52,7 +82,7 @@ class _ViewServicesState extends State<ViewServices> {
               ),
               Container(
                   height: 50,
-                  width: width/2,
+                  width: width / 2,
                   color: backgroundGreen,
                   child: DropdownButton<String>(
                     items: <String>[
@@ -69,7 +99,9 @@ class _ViewServicesState extends State<ViewServices> {
                         child: Text(value),
                       );
                     }).toList(),
-                    onChanged: (_) {},
+                    onChanged: (String? text) {
+                      Date = text!;
+                    },
                   )),
               SizedBox(
                 height: 60,
@@ -85,7 +117,7 @@ class _ViewServicesState extends State<ViewServices> {
               ),
               Container(
                   height: 50,
-                  width: width/2,
+                  width: width / 2,
                   color: backgroundGreen,
                   child: DropdownButton<String>(
                     items: <String>[
@@ -97,7 +129,9 @@ class _ViewServicesState extends State<ViewServices> {
                         child: Text(value),
                       );
                     }).toList(),
-                    onChanged: (_) {},
+                    onChanged: (String? text) {
+                      Time = text!;
+                    },
                   )),
               SizedBox(
                 height: 60,
@@ -113,7 +147,7 @@ class _ViewServicesState extends State<ViewServices> {
               ),
               Container(
                   height: 50,
-                  width: width/2,
+                  width: width / 2,
                   color: backgroundGreen,
                   child: DropdownButton<String>(
                     items: <String>[
@@ -128,24 +162,24 @@ class _ViewServicesState extends State<ViewServices> {
                     }).toList(),
                     onChanged: (String? text) {
                       person = text!;
-                      print(person);
                     },
                   )),
               SizedBox(
                 height: 100,
               ),
               ElevatedButton(
-                child: Text('SUBMIT',style: TextStyle(fontSize: 22),),
+                child: Text(
+                  'SUBMIT',
+                  style: TextStyle(fontSize: 22),
+                ),
                 onPressed: () {
-                  Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const RequestedServices()),
-                      );
+                  addServices();
                 },
                 style: ElevatedButton.styleFrom(
                   primary: blue,
                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                  textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  textStyle:
+                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               )
             ],

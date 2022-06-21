@@ -18,11 +18,11 @@ class _RequestedServicesState extends State<RequestedServices> {
   getdata() async {
     var response;
     try {
-      response = await Dio().get(Base_API + "/utilityBill/getUtilityBillsByResidentId",
-          options: Options(headers: {
-            'Authorization': token, //HEADERS
-          })
-      );
+      response =
+          await Dio().get(Base_API + "/utilityBill/getUtilityBillsByResidentId",
+              options: Options(headers: {
+                'Authorization': token, //HEADERS
+              }));
       Map<String, dynamic> responseJson = json.decode(response.toString());
       print(responseJson['data']);
       setState(() {
@@ -34,13 +34,78 @@ class _RequestedServicesState extends State<RequestedServices> {
     }
   }
 
+  List CleaningList = [];
+  List CookingList = [];
+  List WashingList = [];
+  Future cleaning() async {
+    try {
+      var response =
+          await Dio().get(Base_API + "/service/getCleaningServicesByResidentId",
+              options: Options(headers: {
+                'Authorization': token, //HEADERS
+              }));
+      Map<String, dynamic> responseJson = json.decode(response.toString());
+      print("****************");
+      print(responseJson['data']);
+      setState(() {
+        CleaningList = responseJson['data'];
+      });
+      print(response);
+    } on DioError catch (e) {
+      debugPrint("error:${e.toString()}");
+    }
+  }
+
+  Future cooking() async {
+    try {
+      var response =
+          await Dio().get(Base_API + "/service/getCleaningServicesByResidentId",
+              options: Options(headers: {
+                'Authorization': token, //HEADERS
+              }));
+      Map<String, dynamic> responseJson = json.decode(response.toString());
+      print("****************");
+      print(responseJson['data']);
+      setState(() {
+        CookingList = responseJson['data'];
+      });
+      print(response);
+    } on DioError catch (e) {
+      debugPrint("error:${e.toString()}");
+    }
+  }
+
+  Future washing() async {
+    try {
+      var response =
+          await Dio().get(Base_API + "/service/getCleaningServicesByResidentId",
+              options: Options(headers: {
+                'Authorization': token, //HEADERS
+              }));
+      Map<String, dynamic> responseJson = json.decode(response.toString());
+      print("****************");
+      print(responseJson['data']);
+      setState(() {
+        CleaningList = responseJson['data'];
+      });
+      print(response);
+    } on DioError catch (e) {
+      debugPrint("error:${e.toString()}");
+    }
+  }
+
+  loading() async{
+    await cleaning();
+    await cooking();
+    await washing();
+  }
+
   @override
   void initState() {
     // TODO: implement initState
-    getdata();
+    loading();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -74,48 +139,57 @@ class _RequestedServicesState extends State<RequestedServices> {
                   ),
                 ],
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 height: height / 5,
                 child: ListView.separated(
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(),
-                    itemCount: 10,
+                    itemCount: CookingList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         height: 50,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(width: width/3 - 60, child: Text('Monday')),
-                            Container(width: width/3 - 60, child: Text('8-12')),
                             Container(
-                              child: Row(
-                                children: [
-                                  ElevatedButton(
-                                    child: Text('UPDATE'),
-                                    onPressed: () {
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: buttonGreen,
-                                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                                      textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                width: width / 3 - 60, child: Text(CookingList[index]['day'])),
+                            Container(
+                                width: width / 3 - 60, child: Text(CookingList[index]['time_slot'])),
+                            Container(
+                                child: Row(
+                                  children: [
+                                    ElevatedButton(
+                                      child: Text('Confirm'),
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        primary: buttonGreen,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 15),
+                                        textStyle: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: 20,),
-                                  ElevatedButton(
-                                    child: Text('UPDATE'),
-                                    onPressed: () {
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: buttonGreen,
-                                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                                      textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                    SizedBox(
+                                      width: 20,
                                     ),
-                                  ),
-                                ],
-                              )
-                            )
+                                    ElevatedButton(
+                                      child: Text('Cancel'),
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        primary: buttonGreen,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 15),
+                                        textStyle: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ))
                           ],
                         ),
                       );
@@ -132,48 +206,59 @@ class _RequestedServicesState extends State<RequestedServices> {
                   ),
                 ],
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 height: height / 5,
                 child: ListView.separated(
                     separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(),
-                    itemCount: 10,
+                        const Divider(),
+                    itemCount: CleaningList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         height: 50,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(width: width/3 - 60, child: Text('Monday')),
-                            Container(width: width/3 - 60, child: Text('8-12')),
+                            Container(
+                                width: width / 3 - 60,
+                                child: Text(CleaningList[index]['day'])),
+                            Container(
+                                width: width / 3 - 60,
+                                child: Text(CleaningList[index]['time_slot'])),
                             Container(
                                 child: Row(
-                                  children: [
-                                    ElevatedButton(
-                                      child: Text('UPDATE'),
-                                      onPressed: () {
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: buttonGreen,
-                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                                        textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(width: 20,),
-                                    ElevatedButton(
-                                      child: Text('UPDATE'),
-                                      onPressed: () {
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        primary: buttonGreen,
-                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                                        textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                            )
+                              children: [
+                                ElevatedButton(
+                                  child: Text('Confirm'),
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                    primary: buttonGreen,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 15),
+                                    textStyle: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                ElevatedButton(
+                                  child: Text('Cancel'),
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                    primary: buttonGreen,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 15),
+                                    textStyle: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ))
                           ],
                         ),
                       );
@@ -190,12 +275,14 @@ class _RequestedServicesState extends State<RequestedServices> {
                   ),
                 ],
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 height: height / 5,
                 child: ListView.separated(
                     separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(),
+                        const Divider(),
                     itemCount: 10,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
@@ -203,35 +290,42 @@ class _RequestedServicesState extends State<RequestedServices> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(width: width/3 - 60, child: Text('Monday')),
-                            Container(width: width/3 - 60, child: Text('8-12')),
+                            Container(
+                                width: width / 3 - 60, child: Text(WashingList[index]['day'])),
+                            Container(
+                                width: width / 3 - 60, child: Text(WashingList[index]['time_slot'])),
                             Container(
                                 child: Row(
                                   children: [
                                     ElevatedButton(
-                                      child: Text('UPDATE'),
-                                      onPressed: () {
-                                      },
+                                      child: Text('Confirm'),
+                                      onPressed: () {},
                                       style: ElevatedButton.styleFrom(
                                         primary: buttonGreen,
-                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                                        textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 15),
+                                        textStyle: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    SizedBox(width: 20,),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
                                     ElevatedButton(
-                                      child: Text('UPDATE'),
-                                      onPressed: () {
-                                      },
+                                      child: Text('Cancel'),
+                                      onPressed: () {},
                                       style: ElevatedButton.styleFrom(
                                         primary: buttonGreen,
-                                        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                                        textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 15),
+                                        textStyle: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ],
-                                )
-                            )
+                                ))
                           ],
                         ),
                       );
