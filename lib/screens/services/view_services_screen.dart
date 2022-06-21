@@ -1,10 +1,10 @@
-import 'package:apartment_service_solution/screens/added_services.dart';
+import 'package:apartment_service_solution/screens/services/added_services.dart';
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/baseAPI.dart';
-import '../constants/colors.dart';
+import '../../constants/baseAPI.dart';
+import '../../constants/colors.dart';
 
 class ViewServices extends StatefulWidget {
   final String category;
@@ -15,9 +15,9 @@ class ViewServices extends StatefulWidget {
 }
 
 class _ViewServicesState extends State<ViewServices> {
-  String Date = '';
-  String Time = '';
-  String person = '';
+  String Date = 'Monday';
+  String Time = '08-12';
+  String person = 'Saman';
 
   Future addServices() async {
     try {
@@ -85,7 +85,31 @@ class _ViewServicesState extends State<ViewServices> {
                   height: 50,
                   width: width / 2,
                   color: backgroundGreen,
-                  child: DropdownButton<String>(
+                  child:
+                  new DropdownButton<String>(
+                    hint: Text("Status"),
+                    value: Date,
+                    items: <String>[
+                      'Monday',
+                      'Tuesday',
+                      'Wdnesday',
+                      'Thursday',
+                      'Friday',
+                      'Saturday',
+                      'Sunday'
+                    ].map((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? text) {
+                      setState(() {
+                        Date = text!;
+                      });
+                    },
+                  )
+                  /*DropdownButton<String>(
                     items: <String>[
                       'Monday',
                       'Tuesday',
@@ -103,7 +127,7 @@ class _ViewServicesState extends State<ViewServices> {
                     onChanged: (String? text) {
                       Date = text!;
                     },
-                  )),
+                  )*/),
               SizedBox(
                 height: 60,
               ),
@@ -120,7 +144,26 @@ class _ViewServicesState extends State<ViewServices> {
                   height: 50,
                   width: width / 2,
                   color: backgroundGreen,
-                  child: DropdownButton<String>(
+                  child:
+                  new DropdownButton<String>(
+                    hint: Text("Status"),
+                    value: Time,
+                    items: <String>[
+                      '08-12',
+                      '2-5',
+                    ].map((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? text) {
+                      setState(() {
+                        Time = text!;
+                      });
+                    },
+                  )
+                  /*DropdownButton<String>(
                     items: <String>[
                       '08-12',
                       '2-5',
@@ -133,7 +176,8 @@ class _ViewServicesState extends State<ViewServices> {
                     onChanged: (String? text) {
                       Time = text!;
                     },
-                  )),
+                  )),*/
+              ),
               SizedBox(
                 height: 60,
               ),
@@ -150,7 +194,26 @@ class _ViewServicesState extends State<ViewServices> {
                   height: 50,
                   width: width / 2,
                   color: backgroundGreen,
-                  child: DropdownButton<String>(
+                  child: new DropdownButton<String>(
+                    hint: Text("Status"),
+                    value: person,
+                    items: <String>[
+                      'Saman',
+                      'Nimal',
+                      'Sunil',
+                    ].map((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? text) {
+                      setState(() {
+                        person = text!;
+                      });
+                    },
+                  )
+                  /*DropdownButton<String>(
                     items: <String>[
                       'Saman',
                       'Nimal',
@@ -164,7 +227,8 @@ class _ViewServicesState extends State<ViewServices> {
                     onChanged: (String? text) {
                       person = text!;
                     },
-                  )),
+                  )*/
+              ),
               SizedBox(
                 height: 100,
               ),

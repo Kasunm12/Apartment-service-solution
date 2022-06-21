@@ -1,10 +1,10 @@
 import 'package:apartment_service_solution/screens/login.dart';
-import 'package:apartment_service_solution/screens/my_information.dart';
+import 'package:apartment_service_solution/screens/profile/my_information.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/baseAPI.dart';
-import '../constants/colors.dart';
+import '../../constants/baseAPI.dart';
+import '../../constants/colors.dart';
 
 class MyInformationEdit extends StatefulWidget {
   const MyInformationEdit({Key? key}) : super(key: key);
@@ -32,14 +32,14 @@ class _MyInformationEditState extends State<MyInformationEdit> {
             "name" : _name,
             "resident_id" : _id,
             "email" : _email,
-            "block_number" : Block_number,
+            "block_number" : _blockNo,
             "house_number" : _houseNo,
             "phone_number" : _phoneNo,
             "nic" : _NIC,
             "gender" : _Gender,
             "dob" : _DOB,
             "occupation" : _Occupation,
-            "password" : "0ynrs2pa"
+            "password" : password,
           },
           options: Options(headers: {
             'Authorization': token, //HEADERS
@@ -430,7 +430,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                 )),
                             Container(
                               width: (width / 3) * 2 - 60,
-                              child: TextField(
+                              child: /*TextField(
                                 decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.fromLTRB(15, 5, 15, 5),
@@ -448,7 +448,26 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                                 onChanged: (String? text) {
                                   _Gender = text!;
                                 },
-                              ),
+                              ),*/
+                              new DropdownButton<String>(
+                                hint: Text("Status"),
+                                value: _Gender,
+                                items: <String>[
+                                  'Female',
+                                  'Male',
+                                  '',
+                                ].map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (String? text) {
+                                  setState(() {
+                                    _Gender = text!;
+                                  });
+                                },
+                              )
                             ),
                           ],
                         ),

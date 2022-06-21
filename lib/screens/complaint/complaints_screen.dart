@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:apartment_service_solution/screens/complaint_review.dart';
+import 'package:apartment_service_solution/screens/complaint/complaint_review.dart';
 import 'package:apartment_service_solution/screens/login.dart';
-import 'package:apartment_service_solution/screens/new_complaint_screen.dart';
+import 'package:apartment_service_solution/screens/complaint/new_complaint_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/baseAPI.dart';
-import '../constants/colors.dart';
+import '../../constants/baseAPI.dart';
+import '../../constants/colors.dart';
 
 class Complaint extends StatefulWidget {
   const Complaint({Key? key}) : super(key: key);
@@ -136,7 +136,7 @@ class _ComplaintState extends State<Complaint> {
                                     id: (index + 1).toString(),
                                     category: Complaints[index]['category'] == null ? "" :Complaints[index]['category'],
                                     description: Complaints[index]['description'] == null ? "" :Complaints[index]['description'],
-                                    reply:Complaints[index]['reply'] == null ? "" : Complaints[index]['reply'],
+                                    reply:Complaints[index]['Reply'] == null ? "" : Complaints[index]['Reply'],
                                     status: Complaints[index]['Status'] == null ? "" :Complaints[index]['Status'],
                                   )),
                         );
@@ -198,7 +198,7 @@ class _ComplaintState extends State<Complaint> {
                               height: 40,
                               width: 40,
                               decoration: BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.green),
+                                  shape: BoxShape.circle, color:Complaints[index]['Status'] == "Pending" ? Colors.yellow : Colors.green),
                             ),
                           ),
                         ],

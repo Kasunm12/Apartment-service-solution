@@ -1,7 +1,7 @@
-import 'package:apartment_service_solution/screens/view_services_screen.dart';
+import 'package:apartment_service_solution/screens/services/view_services_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/colors.dart';
+import '../../constants/colors.dart';
 
 class Services extends StatefulWidget {
   const Services({Key? key}) : super(key: key);

@@ -1,9 +1,9 @@
 import 'package:apartment_service_solution/screens/login.dart';
-import 'package:apartment_service_solution/screens/my_information_edit.dart';
+import 'package:apartment_service_solution/screens/profile/my_information_edit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import '../constants/baseAPI.dart';
-import '../constants/colors.dart';
+import '../../constants/baseAPI.dart';
+import '../../constants/colors.dart';
 
 String Resident_id = '';
 String Block_number = '';

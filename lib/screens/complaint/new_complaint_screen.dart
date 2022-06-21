@@ -1,10 +1,10 @@
-import 'package:apartment_service_solution/screens/complaints_screen.dart';
+import 'package:apartment_service_solution/screens/complaint/complaints_screen.dart';
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/baseAPI.dart';
-import '../constants/colors.dart';
+import '../../constants/baseAPI.dart';
+import '../../constants/colors.dart';
 
 class NewComplaint extends StatefulWidget {
   const NewComplaint({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class NewComplaint extends StatefulWidget {
 
 class _NewComplaintState extends State<NewComplaint> {
   String Description = '';
-  String Category = '';
+  String Category = 'Other';
 
   Future addComplaint() async {
     try {
@@ -85,22 +85,26 @@ class _NewComplaintState extends State<NewComplaint> {
                 Container(
                     height: 50,
                     color: backgroundGreen,
-                    child: DropdownButton<String>(
+                    child: new DropdownButton<String>(
+                      hint: Text("Status"),
+                      value: Category,
                       items: <String>[
+                        'Other',
                         'Air Conditioner',
                         'Electricity',
                         'Elevator',
                         'Plumber',
                         'Waste Management Issues',
-                        'Other'
                       ].map((String value) {
-                        return DropdownMenuItem<String>(
+                        return new DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: new Text(value),
                         );
                       }).toList(),
                       onChanged: (String? text) {
-                        Category = text!;
+                        setState(() {
+                          Category = text!;
+                        });
                       },
                     )),
                 SizedBox(
