@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../constants/baseAPI.dart';
 import '../../constants/colors.dart';
 
@@ -24,18 +26,29 @@ class _PreviousUtilityBillsState extends State<PreviousUtilityBills> {
   Future getPreviousBill() async {
     try {
       var response = await Dio().post(Base_API + "/utilityBill/getPreviousBill",
-          data: {"month": "2022-06", "type": Type},
+          data: {"month": Date, "type": Type},
           options: Options(headers: {
             'Authorization': token, //HEADERS
           }));
       Map<String, dynamic> responseJson = json.decode(response.toString());
       print(responseJson['data']);
-      setState(() {
-        Message = responseJson['message'];
-        bill_id = responseJson['data']['bill_id'];
-        bill_amount = responseJson['data']['bill_amount'].toString();
-        paid_amount = responseJson['data']['paid_amount'].toString();
-      });
+      if(responseJson['message']=='Utility bill is received'){
+        setState(() {
+          Message = responseJson['message'];
+          bill_id = responseJson['data']['bill_id'];
+          bill_amount = responseJson['data']['bill_amount'].toString();
+          paid_amount = responseJson['data']['paid_amount'].toString();
+        });
+      }else{
+        Get.snackbar(
+          "success",
+          "Utility bill is not found",
+          backgroundColor: Colors.deepPurple,
+          colorText: Colors.white,
+          borderWidth: 1,
+          borderColor: Colors.grey,
+        );
+      }
       print("*****************************");
       print(bill_id.toString());
     } on DioError catch (e) {
