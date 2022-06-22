@@ -1,3 +1,4 @@
+import 'package:apartment_service_solution/screens/appointment_page.dart';
 import 'package:apartment_service_solution/screens/complaint/complaints_screen.dart';
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:apartment_service_solution/screens/profile/profilescreen.dart';
@@ -223,7 +224,12 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: height*0.015,),
                 InkWell(
                   onTap: (){
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              AppointmentPage()),
+                    );
                   },
                   child: Container(
                       decoration: BoxDecoration(

@@ -2,6 +2,8 @@ import 'package:apartment_service_solution/screens/complaint/complaints_screen.d
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../constants/baseAPI.dart';
 import '../../constants/colors.dart';
@@ -151,7 +153,18 @@ class _NewComplaintState extends State<NewComplaint> {
                 ElevatedButton(
                   child: Text('Submit'),
                   onPressed: () {
-                    addComplaint();
+                    if(Description == ''){
+                      Get.snackbar(
+                        "Not success",
+                        "Add your complaint",
+                        backgroundColor: Colors.deepPurple,
+                        colorText: Colors.white,
+                        borderWidth: 1,
+                        borderColor: Colors.grey,
+                      );
+                    }else{
+                      addComplaint();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: buttonGreen,
