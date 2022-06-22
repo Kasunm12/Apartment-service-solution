@@ -19,6 +19,7 @@ class _ViewServicesState extends State<ViewServices> {
   String Time = '08-12';
   String person = 'None';
   List memberDetails = [];
+  List<String> _memberName = ['None'];
 
   Future addServices() async {
     try {
@@ -41,9 +42,6 @@ class _ViewServicesState extends State<ViewServices> {
       debugPrint("error:${e.toString()}");
     }
   }
-
-  List<String> _memberName = ['None'];
-
   Future getmemberCooking() async {
     try {
       var response =
