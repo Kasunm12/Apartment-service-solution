@@ -311,6 +311,7 @@ class _MyInformationEditState extends State<MyInformationEdit> {
                             Container(
                               width: (width / 3) * 2 - 60,
                               child: TextField(
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.fromLTRB(15, 5, 15, 5),
