@@ -32,14 +32,14 @@ class _PreviousUtilityBillsState extends State<PreviousUtilityBills> {
           }));
       Map<String, dynamic> responseJson = json.decode(response.toString());
       print(responseJson['data']);
-      if(responseJson['message']=='Utility bill is received'){
+      if (responseJson['message'] == 'Utility bill is received') {
         setState(() {
           Message = responseJson['message'];
           bill_id = responseJson['data']['bill_id'];
           bill_amount = responseJson['data']['bill_amount'].toString();
           paid_amount = responseJson['data']['paid_amount'].toString();
         });
-      }else{
+      } else {
         Get.snackbar(
           "success",
           "Utility bill is not found",
@@ -120,52 +120,53 @@ class _PreviousUtilityBillsState extends State<PreviousUtilityBills> {
               SizedBox(height: 20),
               //text form - month and bill type
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 100.0),
-                child:  Container(
-                  height: 60,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                      style: BorderStyle.solid,
-                      width: 1.0,
+                  padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                  child: Container(
+                    height: 60,
+                    width: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey,
+                        style: BorderStyle.solid,
+                        width: 1.0,
+                      ),
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.edit_note,
-                          color:Colors.grey,
-                          size: 40,
-                        ),
-                        new DropdownButton<String>(
-                          hint: Text("Status"),
-                          value: Type,
-                          items: <String>[
-                            'electricity',
-                            'water',
-                          ].map((String value) {
-                            return new DropdownMenuItem<String>(
-                              value: value,
-                              child: new Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? text) {
-                            setState(() {
-                              Type = text!;
-                            });
-                          },
-                        ),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.edit_note,
+                            color: Colors.grey,
+                            size: 40,
+                          ),
+                          new DropdownButton<String>(
+                            hint: Text("Status"),
+                            value: Type,
+                            items: <String>[
+                              'electricity',
+                              'water',
+                            ].map((String value) {
+                              return new DropdownMenuItem<String>(
+                                value: value,
+                                child: new Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (String? text) {
+                              setState(() {
+                                Type = text!;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
+                  )),
+              SizedBox(
+                height: 50,
               ),
-              SizedBox(height: 50,),
               ElevatedButton(
                 child: Text('Submit'),
                 onPressed: () {
@@ -175,13 +176,13 @@ class _PreviousUtilityBillsState extends State<PreviousUtilityBills> {
                   primary: buttonGreen,
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   textStyle:
-                  TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(30.0),
-                child: Message  == 'Utility bill is received' ?
-                Container(
+                child: Message == 'Utility bill is received'
+                    ? Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(13),
                           color: backgroundGreen,
@@ -221,7 +222,8 @@ class _PreviousUtilityBillsState extends State<PreviousUtilityBills> {
                                       style: TextStyle(fontSize: 18),
                                     ),
                                   ),
-                                  Text(bill_id,
+                                  Text(
+                                    bill_id,
                                     style: TextStyle(fontSize: 18),
                                   )
                                 ],
@@ -239,7 +241,7 @@ class _PreviousUtilityBillsState extends State<PreviousUtilityBills> {
                                     ),
                                   ),
                                   Text(
-                                    " - Rs. "+ paid_amount,
+                                    " - Rs. " + paid_amount,
                                     style: TextStyle(fontSize: 18),
                                   )
                                 ],
@@ -248,7 +250,7 @@ class _PreviousUtilityBillsState extends State<PreviousUtilityBills> {
                           ),
                         ),
                       )
-                : Container(),
+                    : Container(),
               ),
             ],
           ),

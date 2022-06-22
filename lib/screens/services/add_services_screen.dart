@@ -17,10 +17,8 @@ class ViewServices extends StatefulWidget {
 class _ViewServicesState extends State<ViewServices> {
   String Date = 'Monday';
   String Time = '08-12';
-  String person = 'Saman';
-  List memberCook = [];
-  List memberWash = [];
-  List memberClean = [];
+  String person = 'None';
+  List memberDetails = [];
 
   Future addServices() async {
     try {
@@ -44,6 +42,8 @@ class _ViewServicesState extends State<ViewServices> {
     }
   }
 
+  List<String> _memberName = ['None'];
+
   Future getmemberCooking() async {
     try {
       var response =
@@ -55,8 +55,14 @@ class _ViewServicesState extends State<ViewServices> {
       print("****************");
       print(responseJson['data']);
       setState(() {
-        memberCook = responseJson['data'];
+        memberDetails = responseJson['data'];
+        memberDetails.forEach((element) {
+          _memberName.add(element['FirstName']+' '+element['MiddleName']);
+        });
       });
+
+      //_nameCook.add("None");
+      print(_memberName);
     } on DioError catch (e) {
       debugPrint("error:${e.toString()}");
     }
@@ -72,7 +78,10 @@ class _ViewServicesState extends State<ViewServices> {
       print("****************");
       print(responseJson['data']);
       setState(() {
-        memberWash = responseJson['data'];
+        memberDetails = responseJson['data'];
+        memberDetails.forEach((element) {
+          _memberName.add(element['FirstName']+' '+element['MiddleName']);
+        });
       });
     } on DioError catch (e) {
       debugPrint("error:${e.toString()}");
@@ -89,7 +98,10 @@ class _ViewServicesState extends State<ViewServices> {
       print("****************");
       print(responseJson['data']);
       setState(() {
-        memberClean = responseJson['data'];
+        memberDetails = responseJson['data'];
+        memberDetails.forEach((element) {
+          _memberName.add(element['FirstName']+' '+element['MiddleName']);
+        });
       });
     } on DioError catch (e) {
       debugPrint("error:${e.toString()}");
@@ -97,9 +109,13 @@ class _ViewServicesState extends State<ViewServices> {
   }
 
   listget() async{
-    await getmemberCooking();
-    await getmemberWashing();
-    await getmemberCleaning();
+    if(widget.category == 'COOKING'){
+      await getmemberCooking();
+    }else if(widget.category == 'WASHING'){
+      await getmemberWashing();
+    }else{
+      await getmemberCleaning();
+    }
   }
 
   @override
@@ -232,11 +248,8 @@ class _ViewServicesState extends State<ViewServices> {
                   child: new DropdownButton<String>(
                     hint: Text("Status"),
                     value: person,
-                    items: <String>[
-                      'Saman',
-                      'Nimal',
-                      'Sunil',
-                    ].map((String value) {
+                    items:
+                    _memberName.map((String value) {
                       return new DropdownMenuItem<String>(
                         value: value,
                         child: new Text(value),
