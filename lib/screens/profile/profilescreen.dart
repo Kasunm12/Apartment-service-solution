@@ -1,10 +1,9 @@
 import 'package:apartment_service_solution/screens/login.dart';
-import 'package:apartment_service_solution/screens/my_information.dart';
+import 'package:apartment_service_solution/screens/profile/my_information.dart';
 import 'package:apartment_service_solution/screens/password_change.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../constants/colors.dart';
+import '../../constants/colors.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -127,15 +126,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 InkWell(
                   onTap: (){
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                          const LoginPage()),
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                          (Route<dynamic> route) => false,
                     );
                   },
                   child: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       ImageIcon(
                         AssetImage("assets/icons/signout.png"),

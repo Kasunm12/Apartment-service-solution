@@ -1,8 +1,8 @@
-import 'package:apartment_service_solution/screens/complaints_screen.dart';
+import 'package:apartment_service_solution/screens/complaint/complaints_screen.dart';
 import 'package:apartment_service_solution/screens/login.dart';
-import 'package:apartment_service_solution/screens/profilescreen.dart';
-import 'package:apartment_service_solution/screens/services_screen.dart';
-import 'package:apartment_service_solution/screens/viewing_utility_bills.dart';
+import 'package:apartment_service_solution/screens/profile/profilescreen.dart';
+import 'package:apartment_service_solution/screens/services/services_screen.dart';
+import 'package:apartment_service_solution/screens/bill/viewing_utility_bills.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

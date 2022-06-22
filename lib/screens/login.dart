@@ -21,11 +21,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   Future LoginData() async {
     try {
       var response = await Dio().post(Base_API + '/resident/login', data: {
         "email": email,
-        "password": password
+        "password": password,
       });
       setState(() {
         token = response.data['tokenObject']['token'];
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
         name = response.data["tokenObject"]["sub"]["name"];
         email = response.data["tokenObject"]["sub"]["email"];
       });
-      if (response.data["success"] == true) {
+      if (response.data["message"] == "Logged in successfully") {
         Get.snackbar(
           "success",
           "logged in successfully",
@@ -52,19 +53,16 @@ class _LoginPageState extends State<LoginPage> {
       } else {
         Get.snackbar(
           "error",
-          "Please check your username or password again",
-          backgroundColor: Colors.deepPurple,
+          "Please check your email or password again",
+          backgroundColor: Colors.red,
           colorText: Colors.white,
           borderWidth: 1,
           borderColor: Colors.grey,
         );
       }
       print("res: $response");
-      print(id);
-      print(name);
-      print(token);
     } catch (e) {
-      Get.snackbar("Error", "Please check your username or password again",
+      Get.snackbar("Error", "Please contact admin!",
           backgroundColor: Colors.deepPurple,
           borderWidth: 1,
           borderColor: Colors.grey,
@@ -78,128 +76,153 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  GlobalKey<FormState> formKey = new GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Main Text Field ex;- EduLIFE
-                SizedBox(height: 60),
-                Icon(
-                  Icons.person,
-                  size: 100,
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'Apartment Service',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
+        child: Form(
+          key: formKey,
+          child: SafeArea(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Main Text Field ex;- EduLIFE
+                  SizedBox(height: 60),
+                  Icon(
+                    Icons.person,
+                    size: 100,
                   ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Welcome to Apartment Service',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                SizedBox(height: 80),
-                //  email textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Enter your Email',
-                        ),
-                        onChanged: (String? text) {
-                          email = text!;
-                        },
-                      ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Apartment Service',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
                     ),
                   ),
-                ),
-                SizedBox(height: 20),
-                // password text field
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Enter Password',
-                        ),
-                        onChanged: (String? text) {
-                          password = text!;
-                        },
-                      ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Welcome to Apartment Service',
+                    style: TextStyle(
+                      fontSize: 20,
                     ),
                   ),
-                ),
-                SizedBox(height: 60),
-                // signin button
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      LoginData();
-                    },
+                  SizedBox(height: 80),
+                  //  email textfield
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
-                      padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: buttonGreen,
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.blue),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Center(
-                        child: Text(
-                          'LOGIN',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: TextFormField(
+                          validator: (input) {
+                            if (input!.isEmpty) {
+                              return 'Please type email';
+                            }else if(false==RegExp(
+                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                .hasMatch(input)){
+                              return "Check your email";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Enter your Email',
+                          ),
+                          onChanged: (String? text) {
+                            email = text!;
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  // password text field
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: TextFormField(
+                          validator: (input) {
+                            if (input!.isEmpty) {
+                              return 'Please type password';
+                            }else if(input.length < 8){
+                              return 'Must be more than 8 charater';
+                            }
+                            return null;
+                          },
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Enter Password',
+                          ),
+                          onChanged: (String? text) {
+                            password = text!;
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 60),
+                  // signin button
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        final formState = formKey.currentState;
+                        if (formState!.validate()) {
+                           LoginData();
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: buttonGreen,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'LOGIN',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20),
-                // not a members ? Register now section field
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Forgot password ? ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff525457),
+                  SizedBox(height: 20),
+                  // not a members ? Register now section field
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Forgot password ? ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff525457),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

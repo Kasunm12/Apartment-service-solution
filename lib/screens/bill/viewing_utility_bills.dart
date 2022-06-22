@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:apartment_service_solution/screens/previousutilitybills.dart';
+import 'package:apartment_service_solution/screens/bill/previousutilitybills.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/baseAPI.dart';
-import '../constants/colors.dart';
-import 'login.dart';
+import '../../constants/baseAPI.dart';
+import '../../constants/colors.dart';
+import '../login.dart';
 
 class ViewingUtilityBills extends StatefulWidget {
   const ViewingUtilityBills({Key? key}) : super(key: key);
