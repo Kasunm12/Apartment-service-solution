@@ -18,11 +18,18 @@ class ViewingUtilityBills extends StatefulWidget {
 class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
 
   String LastEBill = '';
+  String LastWBill = '';
   String currentMEBill = '';
   String currentMEBillId = '';
+  String paidMEBill = '';
+  String currentMWBill = '';
+  String currentMWBillId = '';
+  String paidMWBill = '';
   String PaidforthisM = '';
   String PaybleAmountE = '';
   String DueDate = '';
+  bool isloading = true;
+  var respo;
 
   getdata() async {
     var response;
@@ -33,11 +40,17 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
           })
       );
       Map<String, dynamic> responseJson = json.decode(response.toString());
-      print(responseJson['data']);
+      isloading = false;
       setState(() {
-      responseJson['data']['last_electricity_bill'];
-        //Complaints = responseJson['data'];
+        respo = responseJson['data'];
+       /* LastEBill = responseJson['data']['last_electricity_bill']['bill_amount'].toString();
+        currentMEBill = responseJson['data']['current_electricity_bill']['bill_amount'].toString();
+        currentMEBillId = responseJson['data']['current_electricity_bill']['_id'].toString();
+        paidMEBill = responseJson['data']['current_electricity_bill']['paid_amount'].toString();
+        currentMWBill = responseJson['data']['current_water_bill'];
+        LastWBill = responseJson['data']['last_water_bill'];*/
       });
+
     } catch (e) {
       print(e);
     }
@@ -58,7 +71,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
       body: SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
-            child: Column(
+            child:  Column(
               children: [
                 SizedBox(
                   height: height * 0.1,
@@ -153,11 +166,11 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                     borderRadius: BorderRadius.circular(13),
                     color: backgroundGreen,
                   ),
-                  height: 280,
+                  height: 300,
                   width: width - 40,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10, top: 30, right: 10, bottom: 30),
-                    child: Column(
+                    child: isloading ? Column() :Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -169,7 +182,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. " ,style: TextStyle(fontSize: 18),)
+                            Text(" - Rs. " + respo['last_electricity_bill']['bill_amount'].toString(),style: TextStyle(fontSize: 18),)
                           ],
                         ),
                         SizedBox(
@@ -184,7 +197,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. ",style: TextStyle(fontSize: 18),)
+                            Text(" - Rs. "+ respo['current_electricity_bill']['bill_amount'].toString(),style: TextStyle(fontSize: 18),)
                           ],
                         ),
                         SizedBox(
@@ -199,7 +212,20 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. ",style: TextStyle(fontSize: 18),)
+                            Container(
+                              width: 100,
+                              child: Flexible(
+                                child: RichText(
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2, // this will show dots(...) after 1 lines
+                                  strutStyle: StrutStyle(fontSize: 12.0),
+                                  text: TextSpan(
+                                      style: TextStyle(color: Colors.black, fontSize: 18),
+                                      text: respo['current_electricity_bill']['bill_id'].toString()
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -214,7 +240,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. ",style: TextStyle(fontSize: 18),)
+                            Text(" - Rs. "+respo['current_electricity_bill']['paid_amount'].toString(),style: TextStyle(fontSize: 18),)
                           ],
                         ),
                         SizedBox(
@@ -229,7 +255,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. ",style: TextStyle(fontSize: 18),)
+                            Text(" - Rs. "+ (respo['total_electricity_bill_amount'][0]['sum_val'] - respo['total_electricity_paid_amount'][0]['sum_val']).toString(),style: TextStyle(fontSize: 18),)
                           ],
                         ),
                         SizedBox(
@@ -244,7 +270,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. ",style: TextStyle(fontSize: 18),)
+                            Text(' - '+respo['current_electricity_bill']['month'].toString(),style: TextStyle(fontSize: 18),)
                           ],
                         ),
                       ],
@@ -265,11 +291,11 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                     borderRadius: BorderRadius.circular(13),
                     color: backgroundGreen,
                   ),
-                  height: 320,
+                  height: 350,
                   width: width - 40,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10, top: 30, right: 10, bottom: 30),
-                    child: Column(
+                    child: isloading ? Column() : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -281,7 +307,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. ",style: TextStyle(fontSize: 18),)
+                            Text(" - Rs. "+respo['last_water_bill']['bill_amount'].toString(),style: TextStyle(fontSize: 18),)
                           ],
                         ),
                         SizedBox(
@@ -296,7 +322,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. ",style: TextStyle(fontSize: 18),)
+                            Text(" - Rs. "+respo['current_water_bill']['bill_amount'].toString(),style: TextStyle(fontSize: 18),)
                           ],
                         ),
                         SizedBox(
@@ -310,7 +336,20 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. ",style: TextStyle(fontSize: 18),)
+                            Container(
+                              width: 100,
+                              child: Flexible(
+                                child: RichText(
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2, // this will show dots(...) after 1 lines
+                                  strutStyle: StrutStyle(fontSize: 12.0),
+                                  text: TextSpan(
+                                      style: TextStyle(color: Colors.black, fontSize: 18),
+                                      text: respo['current_water_bill']['bill_id'].toString()
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -324,7 +363,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. ",style: TextStyle(fontSize: 18),)
+                            Text(" - Rs. "+respo['current_water_bill']['paid_amount'].toString(),style: TextStyle(fontSize: 18),)
                           ],
                         ),
                         SizedBox(
@@ -338,7 +377,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                            Text(" - Rs. ",style: TextStyle(fontSize: 18),)
+                            Text(" - Rs. "+ (respo['total_water_bill_amount'][0]['sum_val'] - respo['total_water_paid_amount'][0]['sum_val']).toString(),style: TextStyle(fontSize: 18),)
                           ],
                         ),
                         SizedBox(

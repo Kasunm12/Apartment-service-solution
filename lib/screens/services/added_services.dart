@@ -43,25 +43,6 @@ class _RequestedServicesState extends State<RequestedServices> {
     }
   }
 
-  getdata() async {
-    var response;
-    try {
-      response =
-          await Dio().get(Base_API + "/utilityBill/getUtilityBillsByResidentId",
-              options: Options(headers: {
-                'Authorization': token, //HEADERS
-              }));
-      Map<String, dynamic> responseJson = json.decode(response.toString());
-      print(responseJson['data']);
-      setState(() {
-        responseJson['data']['last_electricity_bill'];
-        //Complaints = responseJson['data'];
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-
   List CleaningList = [];
   List CookingList = [];
   List WashingList = [];
