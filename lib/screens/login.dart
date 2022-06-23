@@ -1,3 +1,4 @@
+import 'package:apartment_service_solution/screens/forget_password_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -212,11 +213,19 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Forgot password ? ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff525457),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ForgetPassword()),
+                          );
+                        },
+                        child: Text(
+                          'Forgot password ? ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff525457),
+                          ),
                         ),
                       ),
                     ],

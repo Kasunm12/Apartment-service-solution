@@ -257,9 +257,9 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                           /* respo['total_electricity_bill_amount'] != [] ?
+                            respo['total_electricity_bill_amount'] != null || respo['total_electricity_paid_amount'] != null?
                             Text(" - Rs. " + (respo['total_electricity_bill_amount'][0]['sum_val'] - respo['total_electricity_paid_amount'][0]['sum_val']).toString()
-                              ,style: TextStyle(fontSize: 18),) :*/
+                              ,style: TextStyle(fontSize: 18),) :
                             Text(" - Rs. "
                               ,style: TextStyle(fontSize: 18),)
                           ],
@@ -399,9 +399,9 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                           /* respo['total_water_bill_amount'] != null ?
+                            respo['total_water_bill_amount'] != null || respo['total_water_paid_amount'] != null?
                             Text(" - Rs. " + (respo['total_water_bill_amount'][0]['sum_val'] - respo['total_water_paid_amount'][0]['sum_val']).toString(),style: TextStyle(fontSize: 18),)
-                                :*/
+                                :
                             Text(" - Rs. ",style: TextStyle(fontSize: 18),)
                           ],
                         ),
