@@ -212,17 +212,21 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                             ),
                             Container(
                               width: 100,
-                              child: Flexible(
-                                child: RichText(
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2, // this will show dots(...) after 1 lines
-                                  strutStyle: StrutStyle(fontSize: 12.0),
-                                  text: TextSpan(
-                                      style: TextStyle(color: Colors.black, fontSize: 18),
-                                      text: respo['current_electricity_bill'] != null ? respo['current_electricity_bill']['bill_id'].toString():
-                                      ''
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: RichText(
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2, // this will show dots(...) after 1 lines
+                                      strutStyle: StrutStyle(fontSize: 12.0),
+                                      text: TextSpan(
+                                          style: TextStyle(color: Colors.black, fontSize: 18),
+                                          text: respo['current_electricity_bill'] != null ? respo['current_electricity_bill']['bill_id'].toString():
+                                          ''
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                           ],
@@ -356,17 +360,21 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                             ),
                             Container(
                               width: 100,
-                              child: Flexible(
-                                child: RichText(
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 2, // this will show dots(...) after 1 lines
-                                  strutStyle: StrutStyle(fontSize: 12.0),
-                                  text: TextSpan(
-                                      style: TextStyle(color: Colors.black, fontSize: 18),
-                                      text: respo['current_water_bill'] != null ?respo['current_water_bill']['bill_id'].toString() :
-                                      ''
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: RichText(
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2, // this will show dots(...) after 1 lines
+                                      strutStyle: StrutStyle(fontSize: 12.0),
+                                      text: TextSpan(
+                                          style: TextStyle(color: Colors.black, fontSize: 18),
+                                          text: respo['current_water_bill'] != null ?respo['current_water_bill']['bill_id'].toString() :
+                                          ''
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                           ],
