@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:apartment_service_solution/screens/services/added_services.dart';
 import 'package:apartment_service_solution/screens/login.dart';
+import 'package:apartment_service_solution/widgets/bottomnavbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class _ViewServicesState extends State<ViewServices> {
           }));
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const RequestedServices()),
+        MaterialPageRoute(builder: (context) => const BottomNavBar()),
       );
       print(response);
     } on DioError catch (e) {

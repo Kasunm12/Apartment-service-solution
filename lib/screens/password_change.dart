@@ -1,5 +1,7 @@
+import 'package:apartment_service_solution/screens/homescreen.dart';
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:apartment_service_solution/screens/profile/my_information.dart';
+import 'package:apartment_service_solution/widgets/bottomnavbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,8 +27,6 @@ class _PasswordChangeState extends State<PasswordChange> {
       var response = await Dio().put(Base_API + "/resident/"+id,
           data: {
             "name" : name,
-            "resident_id" : Resident_id,
-            "email" : email,
             "block_number" : Block_number,
             "house_number" : House_number,
             "phone_number" : Phone_number,
@@ -39,12 +39,34 @@ class _PasswordChangeState extends State<PasswordChange> {
           options: Options(headers: {
             'Authorization': token, //HEADERS
           }));
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-            const MyInformation()),
-      );
+      if(response.data["message"] == "Resident Updated Successfully!"){
+        setState(() {
+          password = _password;
+        });
+        Get.snackbar(
+          "success",
+          "Password Updated Successfully!",
+          backgroundColor: Colors.deepPurple,
+          colorText: Colors.white,
+          borderWidth: 1,
+          borderColor: Colors.grey,
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+              const BottomNavBar()),
+        );
+      }else{
+        Get.snackbar(
+          "success",
+          "Something went wrong",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          borderWidth: 1,
+          borderColor: Colors.grey,
+        );
+      }
       print(response);
     } on DioError catch (e) {
       debugPrint("error:${e.toString()}");

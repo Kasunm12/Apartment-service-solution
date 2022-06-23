@@ -15,12 +15,12 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
-  String email = '';
+  String _email = '';
 
   Future Forget() async {
     try {
-      var response = await Dio().post(Base_API + '', data: {
-        "email": email,
+      var response = await Dio().post(Base_API + '/resident/passwordReset', data: {
+        "email": _email,
       });
       if (response.data["message"] == "Send in successfully") {
         Get.snackbar(
@@ -124,7 +124,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           hintText: 'Enter your Email',
                         ),
                         onChanged: (String? text) {
-                          email = text!;
+                          _email = text!;
                         },
                       ),
                     ),
