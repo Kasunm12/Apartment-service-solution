@@ -1,7 +1,10 @@
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:apartment_service_solution/screens/profile/my_information.dart';
+import 'package:apartment_service_solution/widgets/bottomnavbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../constants/baseAPI.dart';
 import '../../constants/colors.dart';
@@ -28,8 +31,6 @@ class _MyInformationEditState extends State<MyInformationEdit> {
       var response = await Dio().put(Base_API + "/resident/"+id,
           data: {
             "name" : _name,
-            "resident_id" : Resident_id,
-            "email" : email,
             "block_number" : _blockNo,
             "house_number" : _houseNo,
             "phone_number" : _phoneNo,
@@ -42,18 +43,68 @@ class _MyInformationEditState extends State<MyInformationEdit> {
           options: Options(headers: {
             'Authorization': token, //HEADERS
           }));
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-            const MyInformation()),
-      );
+      if(response.data["message"] == "Resident Updated Successfully!"){
+        await myinfor();
+        Get.snackbar(
+          "success",
+          "Resident Updated Successfully!",
+          backgroundColor: Colors.deepPurple,
+          colorText: Colors.white,
+          borderWidth: 1,
+          borderColor: Colors.grey,
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+              const BottomNavBar()),
+        );
+      }else{
+        Get.snackbar(
+          "success",
+          "Something went wrong",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          borderWidth: 1,
+          borderColor: Colors.grey,
+        );
+      }
       print(response);
     } on DioError catch (e) {
+      Get.snackbar(
+        "success",
+        "Something went wrong",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        borderWidth: 1,
+        borderColor: Colors.grey,
+      );
       debugPrint("error:${e.toString()}");
     }
   }
 
+  Future myinfor()  async{
+    try {
+      var response = await Dio().get(Base_API + "/resident/"+id,
+          options: Options(headers: {
+            'Authorization': token, //HEADERS
+          }));
+      setState(() {
+        name = response.data['data']['name'];
+        email = response.data['data']['email'];
+        Resident_id = response.data['data']['resident_id'];
+        Block_number = response.data['data']['block_number'];
+        House_number = response.data['data']['house_number'];
+        Phone_number = response.data['data']['phone_number'];
+        NIC = response.data['data']['nic'];
+        Gender = response.data['data']['gender'];
+        DOB = response.data['data']['dob'];
+        Occupation = response.data['data']['occupation'];
+      });
+    } on DioError catch (e) {
+      debugPrint("error:${e.toString()}");
+    }
+  }
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

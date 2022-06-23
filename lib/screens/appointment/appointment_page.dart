@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:apartment_service_solution/screens/add_appointment_page.dart';
+import 'package:apartment_service_solution/screens/appointment/add_appointment_page.dart';
 import 'package:flutter/material.dart';
 //import 'package:uom_project/src/process/add_appointment_page.dart';
 //import 'package:uom_project/services/api_service.dart' as api_service;

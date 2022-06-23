@@ -180,17 +180,7 @@ class _MyInformationState extends State<MyInformation> {
                                 "Resident ID",
                                 style: TextStyle(fontSize: 18, color: Colors.grey),
                               )),
-                          Flexible(
-                            child: RichText(
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1, // this will show dots(...) after 1 lines
-                              strutStyle: StrutStyle(fontSize: 12.0),
-                              text: TextSpan(
-                                  style: TextStyle(color: Colors.black, fontSize: 18),
-                                  text: Resident_id
-                              ),
-                            ),
-                          ),
+                          Text(Resident_id,style: TextStyle(color: Colors.black, fontSize: 18),),
                         ],
                       ),
                       Divider(color: Colors.black),
