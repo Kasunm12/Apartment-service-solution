@@ -3,6 +3,8 @@ import 'package:apartment_service_solution/screens/services/added_services.dart'
 import 'package:apartment_service_solution/screens/login.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../constants/baseAPI.dart';
 import '../../constants/colors.dart';
 
@@ -269,7 +271,18 @@ class _ViewServicesState extends State<ViewServices> {
                   style: TextStyle(fontSize: 22),
                 ),
                 onPressed: () {
-                  addServices();
+                  if(person == 'None'){
+                    Get.snackbar(
+                      "Not success",
+                      "Please select service member",
+                      backgroundColor: Colors.deepPurple,
+                      colorText: Colors.white,
+                      borderWidth: 1,
+                      borderColor: Colors.grey,
+                    );
+                  }else{
+                    addServices();
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   primary: blue,
