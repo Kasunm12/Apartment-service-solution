@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 20),
+            Padding(padding: EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 20,),
             child: Column(
               children: [
                 Row(
