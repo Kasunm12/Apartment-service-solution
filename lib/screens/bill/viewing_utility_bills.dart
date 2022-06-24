@@ -268,7 +268,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                         SizedBox(
                           height: 20,
                         ),
-                        respo['water_payable_amount'] > 0 ?
+                        respo['electricity_payable_amount'] > 0 ?
                         Row(
                           children: [
                             Container(
@@ -303,7 +303,7 @@ class _ViewingUtilityBillsState extends State<ViewingUtilityBills> {
                                   Center(
                                       child: Container(
                                         width: width*2/5,
-                                        child: respo['water_payable_amount'] < 0 ? Text('Thank you for finishing the payment!',
+                                        child: respo['electricity_payable_amount'] < 0 ? Text('Thank you for finishing the payment!',
                                             style: TextStyle(
                                                 color: darkblue,
                                                 fontSize: 16,
